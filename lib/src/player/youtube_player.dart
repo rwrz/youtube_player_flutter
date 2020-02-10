@@ -151,7 +151,7 @@ class YoutubePlayer extends StatefulWidget {
     this.bottomActions,
     this.actionsPadding = const EdgeInsets.all(8.0),
     this.thumbnailUrl,
-    this.showVideoProgressIndicator = false,
+    this.showVideoProgressIndicator = false
   });
 
   /// Converts fully qualified YouTube Url to video id.
@@ -344,6 +344,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                 widget.onEnded(metaData);
               }
             },
+            serverUrl: controller.flags.serverUrl,
           ),
           if (!controller.flags.hideThumbnail)
             AnimatedOpacity(

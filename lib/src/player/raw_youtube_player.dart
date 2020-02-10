@@ -24,10 +24,15 @@ class RawYoutubePlayer extends StatefulWidget {
   /// {@macro youtube_player_flutter.onEnded}
   final void Function(YoutubeMetaData metaData) onEnded;
 
+  /// Use a hosted player instead of a local one. This will fix problems with copyrighted videos
+  /// server.php file provided with plugin
+  final String serverUrl;
+
   /// Creates a [RawYoutubePlayer] widget.
   RawYoutubePlayer({
     this.key,
     this.onEnded,
+    this.serverUrl
   });
 
   @override
@@ -73,6 +78,39 @@ class _RawYoutubePlayerState extends State<RawYoutubePlayer>
     }
   }
 
+  String serverArgs() {
+    var serverArgs = "";
+    if (!Platform.isIOS && controller.flags.forceHideAnnotation) {
+      serverArgs += "&forceHideAnnotation=1";
+    }
+
+    if (controller.initialVideoId != "") {
+      serverArgs += "&initialVideoId=${controller.initialVideoId}";
+    }
+
+    if (controller.flags.enableCaption) {
+      serverArgs += "&enableCaption=1";
+    }
+
+    if (controller.flags.captionLanguage != "") {
+      serverArgs += "&captionLanguage=${controller.flags.captionLanguage}";
+    }
+
+    if (controller.flags.autoPlay) {
+      serverArgs += "&autoPlay=1";
+    }
+
+    return serverArgs;
+  }
+
+  String generatePlayerOrServerUrl() {
+    if (widget.serverUrl == "") {
+      return player;
+    } else {
+      return "${widget.serverUrl}?${serverArgs()}";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     controller = YoutubePlayerController.of(context);
@@ -82,7 +120,7 @@ class _RawYoutubePlayerState extends State<RawYoutubePlayer>
         key: widget.key,
         userAgent:
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
-        initialUrl: player,
+        initialUrl: generatePlayerOrServerUrl(),
         javascriptMode: JavascriptMode.unrestricted,
         initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
         javascriptChannels: {

@@ -64,6 +64,12 @@ class YoutubePlayerFlags {
   /// Default is `en`.
   final String captionLanguage;
 
+
+  /// Use a remote player with server.php (provided) to bypass copyright video problems
+  ///
+  /// Default is "" (empty)
+  final String serverUrl;
+
   /// Creates [YoutubePlayerFlags].
   const YoutubePlayerFlags({
     this.hideControls = false,
@@ -77,6 +83,7 @@ class YoutubePlayerFlags {
     this.enableCaption = true,
     this.captionLanguage = 'en',
     this.loop = false,
+    this.serverUrl = ""
   });
 
   /// Copies new values assigned to the [YoutubePlayerFlags].

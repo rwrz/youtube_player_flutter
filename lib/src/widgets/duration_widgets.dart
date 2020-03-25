@@ -55,7 +55,7 @@ class _CurrentPositionState extends State<CurrentPosition> {
         _controller.value.position?.inMilliseconds ?? 0,
       ),
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 12.0,
       ),
     );

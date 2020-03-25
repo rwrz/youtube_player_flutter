@@ -53,6 +53,8 @@ if (!empty($_GET['forceHideAnnotation'])) {
                     'modestbranding': 1,
                     <?= empty($_GET['enableCaption']) ? "" : "'cc_load_policy': ".$_GET['enableCaption']."," ?>
                     <?= empty($_GET['captionLanguage']) ? "" : "'cc_lang_pref': '".$_GET['captionLanguage']."'," ?>
+                    <?= empty($_GET['start']) ? "" : "'start': ".$_GET['start']."," ?>
+                    <?= empty($_GET['end']) ? "" : "'end': ".$_GET['end']."," ?>
                     'autoplay': <?= empty($_GET['autoPlay']) ? "0" : "1" ?>
                 },
                 events: {

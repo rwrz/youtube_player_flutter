@@ -194,12 +194,16 @@ class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
   void pause() => _callMethod('pause()');
 
   /// Loads the video as per the [videoId] provided.
-  void load(String videoId, {int startAt = 0}) {
+  void load(String videoId, {int startAt = 0, int endAt}) {
     _updateValues(videoId);
     if (value.errorCode == 1) {
       pause();
     } else {
-      _callMethod('loadById("$videoId",$startAt)');
+      var method = 'loadById("$videoId",$startAt)';
+      if (endAt != null) {
+        method = method.replaceFirst(")", ", $endAt)");
+      }
+      _callMethod(method);
     }
   }
 
@@ -244,7 +248,7 @@ class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
   /// if the seconds parameter specifies a time outside of the currently buffered video data.
   /// Default allowSeekAhead = true
   void seekTo(Duration position, {bool allowSeekAhead = true}) {
-    _callMethod('seekTo(${position.inSeconds},$allowSeekAhead)');
+    _callMethod('seekTo(${(position.inMilliseconds/1000).toStringAsFixed(3)},$allowSeekAhead)');
     play();
     updateValue(value.copyWith(position: position));
   }

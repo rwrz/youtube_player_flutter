@@ -64,11 +64,20 @@ class YoutubePlayerFlags {
   /// Default is `en`.
   final String captionLanguage;
 
-
   /// Use a remote player with server.php (provided) to bypass copyright video problems
   ///
   /// Default is "" (empty)
   final String serverUrl;
+
+  /// Video should starts at "start" timestamp
+  ///
+  /// Default is 0
+  final int start;
+
+  /// Video should ends at "end" timestamp
+  ///
+  /// Default is null
+  final int end;
 
   /// Creates [YoutubePlayerFlags].
   const YoutubePlayerFlags({
@@ -83,7 +92,9 @@ class YoutubePlayerFlags {
     this.enableCaption = true,
     this.captionLanguage = 'en',
     this.loop = false,
-    this.serverUrl = ""
+    this.serverUrl = "",
+    this.start = 0,
+    this.end
   });
 
   /// Copies new values assigned to the [YoutubePlayerFlags].

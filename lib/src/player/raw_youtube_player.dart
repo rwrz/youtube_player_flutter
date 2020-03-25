@@ -96,6 +96,18 @@ class _RawYoutubePlayerState extends State<RawYoutubePlayer>
       serverArgs += "&captionLanguage=${controller.flags.captionLanguage}";
     }
 
+    if (controller.flags.start > 0) {
+      serverArgs += "&start=${controller.flags.start}";
+    }
+
+    if (controller.flags.end != null) {
+      serverArgs += "&end=${controller.flags.end}";
+    }
+
+    if (controller.flags.autoPlay) {
+      serverArgs += "&autoPlay=1";
+    }
+
     if (controller.flags.autoPlay) {
       serverArgs += "&autoPlay=1";
     }

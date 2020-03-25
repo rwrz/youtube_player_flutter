@@ -1,4 +1,4 @@
-// Copyright 2019 Sarbagya Dhaubanjar. All rights reserved.
+// Copyright 2020 Sarbagya Dhaubanjar. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -79,6 +79,11 @@ class YoutubePlayerFlags {
   /// Default is null
   final int end;
 
+  /// Forces High Definition video quality when possible
+  ///
+  /// Default is false.
+  final bool forceHD;
+
   /// Creates [YoutubePlayerFlags].
   const YoutubePlayerFlags({
     this.hideControls = false,
@@ -94,7 +99,8 @@ class YoutubePlayerFlags {
     this.loop = false,
     this.serverUrl = "",
     this.start = 0,
-    this.end
+    this.end,
+    this.forceHD = false,
   });
 
   /// Copies new values assigned to the [YoutubePlayerFlags].
@@ -109,6 +115,7 @@ class YoutubePlayerFlags {
     bool disableDragSeek,
     bool loop,
     bool enableCaption,
+    bool forceHD,
     String captionLanguage,
   }) {
     return YoutubePlayerFlags(
@@ -122,6 +129,7 @@ class YoutubePlayerFlags {
       isLive: isLive ?? this.isLive,
       loop: loop ?? this.loop,
       mute: mute ?? this.mute,
+      forceHD: forceHD ?? this.forceHD,
     );
   }
 }

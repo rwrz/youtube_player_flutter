@@ -131,6 +131,7 @@ class _RawYoutubePlayerState extends State<RawYoutubePlayer>
       child: WebView(
         key: widget.key,
         userAgent: userAgent,
+        initialUrl: widget.serverUrl != "" ? generatePlayerOrServerUrl() : null,
         initialData: WebData(
           data: player,
           baseUrl: 'https://www.youtube.com',
